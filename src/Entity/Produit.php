@@ -44,15 +44,6 @@ class Produit
      */
     private $idLot;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="idProduit")
-     */
-    private $offres;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Vente::class, inversedBy="produits")
-     */
-    private $idVente;
 
     /**
      * @ORM\OneToMany(targetEntity=Estimation::class, mappedBy="idProduit")

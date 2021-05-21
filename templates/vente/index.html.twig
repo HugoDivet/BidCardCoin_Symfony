@@ -10,6 +10,10 @@
             <tr>
                 <th>Id</th>
                 <th>Attribute</th>
+                <th>Date_debut</th>
+                <th>Date_fin</th>
+                <th>Heure_debut</th>
+                <th>Heure_fin</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +22,10 @@
             <tr>
                 <td>{{ vente.id }}</td>
                 <td>{{ vente.Attribute }}</td>
+                <td>{{ vente.dateDebut ? vente.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ vente.dateFin ? vente.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ vente.heureDebut ? vente.heureDebut|date('H:i:s') : '' }}</td>
+                <td>{{ vente.heureFin ? vente.heureFin|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('vente_show', {'id': vente.id}) }}">show</a>
                     <a href="{{ path('vente_edit', {'id': vente.id}) }}">edit</a>
@@ -25,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="7">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

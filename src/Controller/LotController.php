@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Lot;
 use App\Form\LotType;
 use App\Repository\LotRepository;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,10 +52,13 @@ class LotController extends AbstractController
     /**
      * @Route("/{id}", name="lot_show", methods={"GET"})
      */
-    public function show(Lot $lot): Response
+    public function show(Lot $lot, ProduitRepository $produitRepository): Response
     {
         return $this->render('lot/show.html.twig', [
             'lot' => $lot,
+            'produits' =>$produitRepository->findBy(
+                ['idLot' => $lot->getId()]
+            ),
         ]);
     }
 

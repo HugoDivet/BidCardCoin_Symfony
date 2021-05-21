@@ -24,14 +24,41 @@ class Vente
      */
     private $Attribute;
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Produit::class, mappedBy="idVente")
+     * @ORM\Column(type="date", nullable=true)
      */
-    private $produits;
+    private $date_debut;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_fin;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heure_debut;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heure_fin;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="ventes")
+     */
+    private $lieu;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Lot::class, mappedBy="vente")
+     */
+    private $lots;
 
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->lots = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,6 +111,96 @@ class Vente
     public function __toString()
     {
         return (string)($this->getAttribute());
+    }
+
+    public function getDateDebut(): ?\DateTimeInterface
+    {
+        return $this->date_debut;
+    }
+
+    public function setDateDebut(?\DateTimeInterface $date_debut): self
+    {
+        $this->date_debut = $date_debut;
+
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->date_fin;
+    }
+
+    public function setDateFin(?\DateTimeInterface $date_fin): self
+    {
+        $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getHeureDebut(): ?\DateTimeInterface
+    {
+        return $this->heure_debut;
+    }
+
+    public function setHeureDebut(?\DateTimeInterface $heure_debut): self
+    {
+        $this->heure_debut = $heure_debut;
+
+        return $this;
+    }
+
+    public function getHeureFin(): ?\DateTimeInterface
+    {
+        return $this->heure_fin;
+    }
+
+    public function setHeureFin(?\DateTimeInterface $heure_fin): self
+    {
+        $this->heure_fin = $heure_fin;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Lot[]
+     */
+    public function getLots(): Collection
+    {
+        return $this->lots;
+    }
+
+    public function addLot(Lot $lot): self
+    {
+        if (!$this->lots->contains($lot)) {
+            $this->lots[] = $lot;
+            $lot->setVente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLot(Lot $lot): self
+    {
+        if ($this->lots->removeElement($lot)) {
+            // set the owning side to null (unless already changed)
+            if ($lot->getVente() === $this) {
+                $lot->setVente(null);
+            }
+        }
+
+        return $this;
     }
 
 }

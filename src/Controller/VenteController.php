@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Vente;
 use App\Form\VenteType;
+use App\Repository\LotRepository;
 use App\Repository\VenteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,10 +52,13 @@ class VenteController extends AbstractController
     /**
      * @Route("/{id}", name="vente_show", methods={"GET"})
      */
-    public function show(Vente $vente): Response
+    public function show(Vente $vente, LotRepository $lotRepository): Response
     {
         return $this->render('vente/show.html.twig', [
             'vente' => $vente,
+            'lots' =>$lotRepository->findBy(
+                ['vente' => $vente->getId()]
+            ),
         ]);
     }
 

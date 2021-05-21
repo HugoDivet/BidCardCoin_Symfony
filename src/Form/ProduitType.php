@@ -17,9 +17,7 @@ class ProduitType extends AbstractType
             ->add('PrixDeDepart')
             ->add('Etat')
             ->add('idLot')
-            ->add('idVente')
             ->add('idCategorie')
-            ->add('estimations')
         ;
     }
 

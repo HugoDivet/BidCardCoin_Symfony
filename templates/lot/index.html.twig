@@ -11,6 +11,8 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
+                <th>Prix_depart</th>
+                <th>Is_sold</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +22,8 @@
                 <td>{{ lot.id }}</td>
                 <td>{{ lot.Nom }}</td>
                 <td>{{ lot.Description }}</td>
+                <td>{{ lot.prixDepart }}</td>
+                <td>{{ lot.isSold ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('lot_show', {'id': lot.id}) }}">show</a>
                     <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>
@@ -27,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

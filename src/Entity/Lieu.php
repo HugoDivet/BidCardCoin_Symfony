@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LieuRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +34,16 @@ class Lieu
      */
     private $Ville;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Vente::class, mappedBy="lieu")
+     */
+    private $ventes;
+
+    public function __construct()
+    {
+        $this->ventes = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +72,9 @@ class Lieu
 
         return $this;
     }
+    public function __toString(){
+        return (string)$this->Adresse;
+    }
 
     public function getVille(): ?string
     {
@@ -69,6 +84,36 @@ class Lieu
     public function setVille(string $Ville): self
     {
         $this->Ville = $Ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Vente[]
+     */
+    public function getVentes(): Collection
+    {
+        return $this->ventes;
+    }
+
+    public function addVente(Vente $vente): self
+    {
+        if (!$this->ventes->contains($vente)) {
+            $this->ventes[] = $vente;
+            $vente->setLieu($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVente(Vente $vente): self
+    {
+        if ($this->ventes->removeElement($vente)) {
+            // set the owning side to null (unless already changed)
+            if ($vente->getLieu() === $this) {
+                $vente->setLieu(null);
+            }
+        }
 
         return $this;
     }

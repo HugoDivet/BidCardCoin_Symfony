@@ -34,9 +34,30 @@ class Lot
      */
     private $produits;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $prix_depart;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_sold;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Offre::class, mappedBy="lot")
+     */
+    private $offres;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Vente::class, inversedBy="lots")
+     */
+    private $vente;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->offres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +122,72 @@ class Lot
     public function __toString()
     {
         return (string)($this->getNom());
+    }
+
+    public function getPrixDepart(): ?float
+    {
+        return $this->prix_depart;
+    }
+
+    public function setPrixDepart(?float $prix_depart): self
+    {
+        $this->prix_depart = $prix_depart;
+
+        return $this;
+    }
+
+    public function getIsSold(): ?bool
+    {
+        return $this->is_sold;
+    }
+
+    public function setIsSold(?bool $is_sold): self
+    {
+        $this->is_sold = $is_sold;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offre[]
+     */
+    public function getOffres(): Collection
+    {
+        return $this->offres;
+    }
+
+    public function addOffre(Offre $offre): self
+    {
+        if (!$this->offres->contains($offre)) {
+            $this->offres[] = $offre;
+            $offre->setLot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffre(Offre $offre): self
+    {
+        if ($this->offres->removeElement($offre)) {
+            // set the owning side to null (unless already changed)
+            if ($offre->getLot() === $this) {
+                $offre->setLot(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getVente(): ?Vente
+    {
+        return $this->vente;
+    }
+
+    public function setVente(?Vente $vente): self
+    {
+        $this->vente = $vente;
+
+        return $this;
     }
 
 }

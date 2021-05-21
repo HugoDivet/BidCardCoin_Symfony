@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>OffreAcheteur</th>
+                <th>DateOffre</th>
+                <th>HeureOffre</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +20,8 @@
             <tr>
                 <td>{{ offre.id }}</td>
                 <td>{{ offre.OffreAcheteur }}</td>
+                <td>{{ offre.dateOffre ? offre.dateOffre|date('Y-m-d') : '' }}</td>
+                <td>{{ offre.heureOffre ? offre.heureOffre|date('H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('offre_show', {'id': offre.id}) }}">show</a>
                     <a href="{{ path('offre_edit', {'id': offre.id}) }}">edit</a>
@@ -25,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

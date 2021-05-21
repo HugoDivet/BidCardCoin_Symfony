@@ -47,4 +47,17 @@ class VenteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function VenteActuelle()
+    {
+
+        return $this->getEntityManager()->createQuery(
+            'SELECT v
+            FROM App\Entity\Vente v
+            WHERE (v.date_debut <= :date ) AND (v.date_fin >= :date )
+            ORDER BY v.date_fin ASC, v.heure_fin ASC'
+        )->setParameter('date', date('Y-m-d H:i:s'))->getResult();
+
+    }
+
 }

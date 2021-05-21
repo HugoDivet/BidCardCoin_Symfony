@@ -14,7 +14,6 @@ class AcheteurType extends AbstractType
         $builder
             ->add('Solvable')
             ->add('idUtilisateur')
-            ->add('offres')
         ;
     }
 

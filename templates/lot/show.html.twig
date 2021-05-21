@@ -19,9 +19,50 @@
                 <th>Description</th>
                 <td>{{ lot.Description }}</td>
             </tr>
+            <tr>
+                <th>Prix_depart</th>
+                <td>{{ lot.prixDepart }}</td>
+            </tr>
+            <tr>
+                <th>Is_sold</th>
+                <td>{{ lot.isSold ? 'Yes' : 'No' }}</td>
+            </tr>
         </tbody>
     </table>
+<br>
+    <h4>Produits appartenant à ce lot :</h4>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>PrixDeDepart</th>
+            <th>Etat</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for produit in produits %}
+            <tr>
+                <td>{{ produit.Nom }}</td>
+                <td>{{ produit.Description }}</td>
+                <td>{{ produit.PrixDeDepart }}</td>
+                <td>{{ produit.Etat }}</td>
+                <td>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}">Voir le produit en détails</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Il n'y a aucun produit dans ce lot.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>Faire une enchère</h3>
+    <a href="{{ path('offre_new') }}">Enchérir</a>
+    <br><br><br>
     <a href="{{ path('lot_index') }}">back to list</a>
 
     <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>

@@ -13,6 +13,11 @@ class VenteType extends AbstractType
     {
         $builder
             ->add('Attribute')
+            ->add('date_debut')
+            ->add('date_fin')
+            ->add('heure_debut')
+            ->add('heure_fin')
+            ->add('lieu')
         ;
     }
 

@@ -22,15 +22,28 @@ class Offre
      */
     private $OffreAcheteur;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Produit::class, inversedBy="offres")
-     */
-    private $idProduit;
+
+
 
     /**
-     * @ORM\OneToOne(targetEntity=Acheteur::class, inversedBy="offres", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Lot::class, inversedBy="offres")
      */
-    private $idAcheteur;
+    private $lot;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateOffre;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    private $heureOffre;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Acheteur::class, inversedBy="offres")
+     */
+    private $acheteur;
 
     public function getId(): ?int
     {
@@ -69,6 +82,54 @@ class Offre
     public function setIdAcheteur(?Acheteur $idAcheteur): self
     {
         $this->idAcheteur = $idAcheteur;
+
+        return $this;
+    }
+
+    public function getLot(): ?Lot
+    {
+        return $this->lot;
+    }
+
+    public function setLot(?Lot $lot): self
+    {
+        $this->lot = $lot;
+
+        return $this;
+    }
+
+    public function getDateOffre(): ?\DateTimeInterface
+    {
+        return $this->dateOffre;
+    }
+
+    public function setDateOffre(\DateTimeInterface $dateOffre): self
+    {
+        $this->dateOffre = $dateOffre;
+
+        return $this;
+    }
+
+    public function getHeureOffre(): ?\DateTimeInterface
+    {
+        return $this->heureOffre;
+    }
+
+    public function setHeureOffre(?\DateTimeInterface $heureOffre): self
+    {
+        $this->heureOffre = $heureOffre;
+
+        return $this;
+    }
+
+    public function getAcheteur(): ?Acheteur
+    {
+        return $this->acheteur;
+    }
+
+    public function setAcheteur(?Acheteur $acheteur): self
+    {
+        $this->acheteur = $acheteur;
 
         return $this;
     }
