@@ -20,12 +20,12 @@
                 <td>{{ lot.Description }}</td>
             </tr>
             <tr>
-                <th>Prix_depart</th>
+                <th>Prix de depart</th>
                 <td>{{ lot.prixDepart }}</td>
             </tr>
             <tr>
-                <th>Is_sold</th>
-                <td>{{ lot.isSold ? 'Yes' : 'No' }}</td>
+                <th>Vendue ?</th>
+                <td>{{ lot.isSold ? 'Oui' : 'Non' }}</td>
             </tr>
         </tbody>
     </table>
@@ -37,7 +37,7 @@
         <tr>
             <th>Nom</th>
             <th>Description</th>
-            <th>PrixDeDepart</th>
+            <th>Prix de depart</th>
             <th>Etat</th>
             <th>Actions</th>
         </tr>
@@ -50,7 +50,7 @@
                 <td>{{ produit.PrixDeDepart }}</td>
                 <td>{{ produit.Etat }}</td>
                 <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">Voir le produit en détails</a>
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}"><Button type="button" class="btn btn-info">Voir le produit en détails</Button></a>
                 </td>
             </tr>
         {% else %}
@@ -61,11 +61,12 @@
         </tbody>
     </table>
     <h3>Faire une enchère</h3>
-    <a href="{{ path('offre_new') }}">Enchérir</a>
+
+
+    <a href="{{ path('offre_new') }}"><Button type="button" class="btn btn-success">Enchérir</Button></a>
     <br><br><br>
-    <a href="{{ path('lot_index') }}">back to list</a>
+    <a href="{{ path('lot_index') }}"><Button type="button" class="btn btn-danger">Retour</Button></a>
 
-    <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>
+    <a href="{{ path('lot_edit', {'id': lot.id}) }}"><Button type="button" class="btn btn-warning">Modifier le lot</Button></a>
 
-    {{ include('lot/_delete_form.html.twig') }}
 {% endblock %}

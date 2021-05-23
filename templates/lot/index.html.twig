@@ -11,9 +11,9 @@
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Prix_depart</th>
-                <th>Is_sold</th>
-                <th>actions</th>
+                <th>Prix de depart</th>
+                <th>Est vendu ?</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,19 +23,19 @@
                 <td>{{ lot.Nom }}</td>
                 <td>{{ lot.Description }}</td>
                 <td>{{ lot.prixDepart }}</td>
-                <td>{{ lot.isSold ? 'Yes' : 'No' }}</td>
+                <td>{{ lot.isSold ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('lot_show', {'id': lot.id}) }}">show</a>
-                    <a href="{{ path('lot_edit', {'id': lot.id}) }}">edit</a>
+                    <a href="{{ path('lot_show', {'id': lot.id}) }}"><Button type="button" class="btn btn-info">Afficher</Button></a>
+                    <a href="{{ path('lot_edit', {'id': lot.id}) }}"><Button type="button" class="btn btn-warning">Modifier</Button></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Il n'existe aucun lot.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('lot_new') }}">Create new</a>
+    <a href="{{ path('lot_new') }}"><Button type="button" class="btn btn-success">Ajouter un lot</Button></a>
 {% endblock %}

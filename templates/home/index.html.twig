@@ -8,13 +8,13 @@
     <br>
     <h3>Hugo Divet - B2C1 - BTS SIO</h3>
     <br>
-    <h4> Liste des ventes en cours </h4>
+    <h4> Liste des ventes en cours </h4><br>
     <table class="table">
         <thead>
         <tr>
-            <th>Attribute</th>
-            <th>Date_fin</th>
-            <th>Heure_fin</th>
+            <th>Nom de la vente</th>
+            <th>Date de fin</th>
+            <th>Heure de fin</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -25,7 +25,7 @@
                 <td>{{ vente.dateFin ? vente.dateFin|date('Y-m-d') : '' }}</td>
                 <td>{{ vente.heureFin ? vente.heureFin|date('H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('vente_show', {'id': vente.id}) }}">Voir les lots</a>
+                    <a href="{{ path('vente_show', {'id': vente.id}) }}"><button type="button" class="btn btn-info">Voir les lots</button></a>
                 </td>
             </tr>
         {% else %}

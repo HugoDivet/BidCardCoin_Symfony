@@ -20,7 +20,7 @@
                 <td>{{ produit.Description }}</td>
             </tr>
             <tr>
-                <th>PrixDeDepart</th>
+                <th>Prix de depart</th>
                 <td>{{ produit.PrixDeDepart }}</td>
             </tr>
             <tr>
@@ -30,9 +30,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('produit_index') }}">back to list</a>
+    <a href="{{ path('produit_index') }}"><Button type="button" class="btn btn-danger">Retour</Button></a>
 
-    <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
-
-    {{ include('produit/_delete_form.html.twig') }}
+    <a href="{{ path('produit_edit', {'id': produit.id}) }}"><Button type="button" class="btn btn-warning">Modifier le produit</Button></a>
 {% endblock %}

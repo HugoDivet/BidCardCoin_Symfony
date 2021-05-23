@@ -12,23 +12,23 @@
                 <td>{{ vente.id }}</td>
             </tr>
             <tr>
-                <th>Attribute</th>
+                <th>Nom</th>
                 <td>{{ vente.Attribute }}</td>
             </tr>
             <tr>
-                <th>Date_debut</th>
+                <th>Date de debut</th>
                 <td>{{ vente.dateDebut ? vente.dateDebut|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Date_fin</th>
+                <th>Date de fin</th>
                 <td>{{ vente.dateFin ? vente.dateFin|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Heure_debut</th>
+                <th>Heure de debut</th>
                 <td>{{ vente.heureDebut ? vente.heureDebut|date('H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Heure_fin</th>
+                <th>Heure de fin</th>
                 <td>{{ vente.heureFin ? vente.heureFin|date('H:i:s') : '' }}</td>
             </tr>
         </tbody>
@@ -38,8 +38,8 @@
         <thead>
         <tr>
             <th>Nom</th>
-            <th>Prix_depart</th>
-            <th>actions</th>
+            <th>Prix de depart</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +48,8 @@
                 <td>{{ lot.Nom }}</td>
                 <td>{{ lot.prixDepart }}</td>
                 <td>
-                    <a href="{{ path('lot_show', {'id': lot.id}) }}">Enchérir</a>
+                    <a href="{{ path('lot_show', {'id': lot.id}) }}"><Button type="button" class="btn btn-info">Enchérir sur le lot</Button></a>
+                    <a href="{{ path('lot_edit', {'id': lot.id}) }}"><Button type="button" class="btn btn-warning">Modifier</Button></a>
                 </td>
             </tr>
         {% else %}
@@ -59,9 +60,8 @@
         </tbody>
     </table>
 
-    <a href="{{ path('vente_index') }}">back to list</a>
+    <a href="{{ path('vente_index') }}"><Button type="button" class="btn btn-danger">Retour</Button></a>
 
-    <a href="{{ path('vente_edit', {'id': vente.id}) }}">edit</a>
+    <a href="{{ path('vente_edit', {'id': vente.id}) }}"><Button type="button" class="btn btn-warning">Modifier la vente</Button></a>
 
-    {{ include('vente/_delete_form.html.twig') }}
 {% endblock %}
